@@ -11,6 +11,6 @@
 3. glitter_filter(Cam_Option, File_Path, Filter_Level) # gliter filter
     1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
     2. File_Path : filtered image will be saved here
-    3. Filter_Level : frequency of glitter 0 = maximum, large num to decrease(integer only)
+    3. Filter_Level : frequency of glitter 0 = maximum, large num to decrease(integer only >= 0)
 
 
