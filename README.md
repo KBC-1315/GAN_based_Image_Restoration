@@ -10,8 +10,7 @@
     3. Image_width : image width
     4. Image_heigth : image height
  
-![test_gt](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/5033c90e-7e48-4aa8-82ed-9ce9f6f8ce32)
-|![testfull_filter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/e68be829-1e80-4efc-bf65-8c5c57d03351)--- | --- |
+![test_gt](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/5033c90e-7e48-4aa8-82ed-9ce9f6f8ce32)|![testfull_filter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/e68be829-1e80-4efc-bf65-8c5c57d03351) --- | --- |
  
 2. nose_filter(Can_Option, File_Path, Image_width, Image_height) # Pig nose only
     1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
