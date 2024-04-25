@@ -5,7 +5,7 @@
 <details>
  
 1. full_filter(Can_Option, File_Path, Image_width, Image_height) # Animal ears, nose
-    1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
+    1. Cam_Option : Numeric index -> Camera, Filepath -> save_filename
     2. File_Path : filtered image will be saved here
     3. Image_width : image width
     4. Image_heigth : image height
@@ -15,7 +15,7 @@
 ![testfull_filter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/e68be829-1e80-4efc-bf65-8c5c57d03351)
  
 2. nose_filter(Can_Option, File_Path, Image_width, Image_height) # Pig nose only
-    1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
+    1. Cam_Option : Numeric index -> Camera, Filepath -> save_filename
     2. File_Path : filtered image will be saved here
     3. Image_width : image width
     4. Image_heigth : image height
@@ -24,7 +24,7 @@
 ![nose_filter_output png_nose_filter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/e5a3c59b-5db7-4916-a10f-695ec9ff3754)
 
 3. glitter_filter(Cam_Option, File_Path, Filter_Level) # gliter filter
-    1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
+    1. Cam_Option : Numeric index -> Camera, Filepath -> save_filename
     2. File_Path : filtered image will be saved here
     3. Image_width : image width
     4. Image_heigth : image height
