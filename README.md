@@ -1,7 +1,7 @@
 ## GAN_based_Image_Restoration
  24SS_Data_Engineering_Team1
 
-## Image_Filter_Generator
+## Image_Filter_Generator(예시 이미지는 바꿀예정...ㅎ)
 1. full_filter(Cam_Option, File_Path) # Animal ears, nose
     1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
     2. File_Path : filtered image will be saved here
