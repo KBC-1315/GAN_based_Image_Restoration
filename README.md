@@ -3,6 +3,7 @@
 
 ## Image_Filter_Generator(예시 이미지는 바꿀예정...ㅎ)
 <details>
+ 
 1. full_filter(Can_Option, File_Path, Image_width, Image_height) # Animal ears, nose
     1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
     2. File_Path : filtered image will be saved here
