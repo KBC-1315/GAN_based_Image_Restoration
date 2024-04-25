@@ -3,6 +3,8 @@ import mediapipe as mp
 import imutils
 import random
 from math import hypot
+import os
+import numpy
 
 class Image_Filter_Generator():
     def __init__(self):
@@ -20,20 +22,22 @@ class Image_Filter_Generator():
             for c in range(0, 3):
                 image[y-h:y+h, x-w:x+w, c] = (overlay_image[:,:,c] * mask_image) + (image[y-h:y+h, x-w:x+w, c] * (1 - mask_image))
 
-    def full_filter(self, Cam_Option, File_path):
+    def full_filter(self, Cam_Option, File_path, Image_width, Image_height):
         # 얼굴을 찾고, 찾은 얼굴에 표시를 해주기 위한 변수 정의
         mp_face_detection = mp.solutions.face_detection # 얼굴 검출을 위한 face_detection 모듈
         mp_drawing = mp.solutions.drawing_utils # 얼굴의 특징을 그리기 위한 drawing_utils 모듈
 
         # 이미지 불러오기
-        image_left_eye = cv2.imread("./samples/left_eye_1.png", cv2.IMREAD_UNCHANGED)
-        image_right_eye = cv2.imread("./samples/right_eye_1.png", cv2.IMREAD_UNCHANGED)
-        image_nose_tip = cv2.imread("./samples/nose_tip_1.png", cv2.IMREAD_UNCHANGED)
+        image_left_eye = cv2.imread("./Image_Filter_Generator/samples/left_eye_1.png", cv2.IMREAD_UNCHANGED)
+        image_right_eye = cv2.imread("./Image_Filter_Generator/samples/right_eye_1.png", cv2.IMREAD_UNCHANGED)
+        image_nose_tip = cv2.imread("./Image_Filter_Generator/samples/nose_tip_1.png", cv2.IMREAD_UNCHANGED)
 
-        with mp_face_detection.FaceDetection(
-            model_selection=0, min_detection_confidence=0.5) as face_detection:
+        with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
             while Cam_Option.isOpened():
                 success, image = Cam_Option.read()
+                success, image2 = Cam_Option.read()
+                image2 = imutils.resize(image2, width = Image_width, height = Image_height)
+                image = imutils.resize(image, width = Image_width, height = Image_height)
                 if not success:
                     break
 
@@ -88,19 +92,23 @@ class Image_Filter_Generator():
                         self.overlay(image, *left_eye, ear_input_size, ear_input_size, image_right_eye)
                         self.overlay(image, *nose_tip, nose_input_size, nose_input_size, image_nose_tip)
                 # Flip the image horizontally for a selfie-view display
-
-                cv2.imshow("Full Face Filter Generator", cv2.resize(image, None, fx = 1, fy = 1))
+                image = cv2.resize(image, None, fx = 1, fy = 1)
+                image2 = cv2.resize(image2, None, fx = 1, fy = 1)
+                cv2.imshow("Full Face Filter Generator", image)
 
                 if cv2.waitKey(1) == ord('q'):
-                    cv2.imwrite(File_path, image)
+                    cv2.imwrite(File_path + "_gt.png", image2)
+                    cv2.imwrite(File_path + "full_filter.png", image)
                     break
+        Cam_Option.release()
+        cv2.destroyAllWindows()
 
-    def glitter_filter(self, Cam_Option, File_path, filter_level):
+    def glitter_filter(self, Cam_Option, File_path, Image_width, Image_height, filter_level):
         temp_idx = 0
         frequency = filter_level # 0 보다 큰 정수
         eye_list = [242, 238, 94, 370, 362, 458, 462, 289, 455, 439, 235, 219, 94, 407, 408, 292, 306, 324, 318, 95, 77, 183, 191, 184, 76, 62, 81, 41, 38, 82, 12, 13, 312, 268, 271, 310, 272, 7, 246, 247, 30, 29, 46, 53, 52, 65, 55, 124, 113, 225, 247, 151, 33, 150, 7, 25, 110, 24, 23, 22, 26, 226, 35, 31, 156, 124, 113, 150, 140, 130, 120, 110, 180, 160, 190, 362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381, 463, 341, 256, 252, 253, 254, 339, 255, 359, 467, 260, 259, 257, 258, 286, 414, 413, 441, 442, 443, 444, 445, 342, 446, 261, 448, 449, 450, 451, 452, 453, 464, 465, 357, 350, 349, 348, 449, 448, 261, 265, 133, 173, 157, 158, 159, 160, 161, 162, 33, 7, 163, 144, 145, 153, 154, 155, 112, 243, 190, 56, 28, 27, 29, 30, 247, 226, 31, 228, 229, 230, 231, 232, 233, 244, 189, 221, 222, 223, 224, 226, 124, 35, 31, 228, 229, 230, 231, 232, 233, 245, 55, 53, 46, 156, 143, 111, 117, 118, 119, 120, 121, 128, 188]
         # video load : 웹캠 비디오를 캡처합니다.
-        image_gliter = cv2.imread("./samples/gliter.png", cv2.IMREAD_UNCHANGED)
+        image_gliter = cv2.imread(".\\Image_Filter_Generator\\samples\\gliter.png", cv2.IMREAD_UNCHANGED)
 
         # mediapipe function
         mpDraw = mp.solutions.drawing_utils
@@ -112,8 +120,12 @@ class Image_Filter_Generator():
         while Cam_Option.isOpened():
             # read Video
             ret, frame = Cam_Option.read()
+            ret, frame2 = Cam_Option.read()
+
             # Frame Resizing
-            frame = imutils.resize(frame, width = 1000)
+            frame = imutils.resize(frame, width = Image_width, height = Image_height)
+            frame2 = imutils.resize(frame2, width = Image_width, height = Image_height)
+
             # To improve performance, optionally mark the image as nots writeable to pass by reference
             frame.flags.writeable = False
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -122,43 +134,50 @@ class Image_Filter_Generator():
             frame.flags.writeable = True
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
-            gliter_size = int(len(frame) * 0.005)
+            gliter_size = int(max(numpy.round(len(frame) * 0.005,0), 1))
             
-            if gliter_size != gliter_size // 2 * 2 :
+            if gliter_size % 2 != 0 :
                 input_gliter_size = gliter_size // 2
                 gliter_size = input_gliter_size * 2
             else :
                 input_gliter_size = gliter_size // 2
+
             image_gliter = cv2.resize(image_gliter, dsize = (gliter_size, gliter_size))
+
             if results.multi_face_landmarks:
                 # Overlay Landmarks on Face
                 for face_landmarks in results.multi_face_landmarks:
                     # mpDraw.draw_landmarks(frame, face_landmarks, mpFaceMesh.FACEMESH_CONTOURS, drawSpec, drawSpec)
                     # Coord of Landmark
                     for id, lm in enumerate(face_landmarks.landmark):
-                        if temp_idx // 10 == 0 :
-                            temp_no = random.randint(0, frequency)
+                        if temp_idx % 50 == 0 :
+                            temp_list = []
+                            for i in range(1, len(face_landmarks.landmark) + 1):
+                                temp_list.append(random.randint(0, frequency))
                         ih, iw, ic = frame.shape
                         x, y = int(lm.x*iw), int(lm.y*ih)
-                        if temp_no == 0 and id not in eye_list:
+                        if temp_list[id] == 0 and id not in eye_list:
                             self.overlay(frame, x, y, input_gliter_size, input_gliter_size, image_gliter)
                     temp_idx += 1
                     # print(temp_idx)
                         # print nums
                         # cv2.putText(frame, str(id), (x, y), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 1)
             # Video
-            cv2.imshow("Glitter Filter Generator", cv2.resize(frame, None, fx = 1, fy = 1))
+            frame = cv2.resize(frame, None, fx = 1, fy = 1)
+            frame2 = cv2.resize(frame2, None, fx = 1, fy = 1)
+            cv2.imshow("Glitter Filter Generator", frame)
 
             # q 입력시 종료
             if cv2.waitKey(1) == ord('q'):
-                cv2.imwrite(File_path, frame)
+                cv2.imwrite(File_path + "_gt.png", frame2)
+                cv2.imwrite(File_path + "_glitter.png", frame)
                 break
         Cam_Option.release()
         cv2.destroyAllWindows()
 
-    def nose_filter(self, Cam_Option, File_path):
+    def nose_filter(self, Cam_Option, File_path, Image_width, Image_height):
         # 영상 및 돼지코 이미지 로드
-        nose_img = cv2.imread('./samples/pig_nose.png') 
+        nose_img = cv2.imread('./Image_Filter_Generator/samples/pig_nose.png') 
 
         # 5개의 center nose landmark point
         nose_landmarks = [49,279,197,2,5] 
@@ -171,8 +190,11 @@ class Image_Filter_Generator():
         while True:
             # 영상 읽기
             ret, frame = Cam_Option.read()
+            ret, frame2 = Cam_Option.read()
             # frame 크기 조정
-            frame = imutils.resize(frame, width=1000)
+            frame = imutils.resize(frame, width = Image_width, height = Image_height)
+            frame2 = imutils.resize(frame2, width = Image_width, height = Image_height)
+
             #frame에서 facemesh 검출
             results = faceMesh.process(frame)
             if results.multi_face_landmarks:
@@ -231,10 +253,13 @@ class Image_Filter_Generator():
                     ] = final_nose
 
             # 변경된 이미지 출력
+            frame = cv2.resize(frame, None, fx = 1, fy = 1)
+            frame2 = cv2.resize(frame2, None, fx = 1, fy = 1)
             cv2.imshow("Nose Filter Generator", cv2.resize(frame, None, fx = 1, fy = 1))
             # q 입력시 종료
             if cv2.waitKey(1) == ord('q'):
-                cv2.imwrite(File_path, frame)
+                cv2.imwrite(File_path + "_nose_filter.png", frame)
+                cv2.imwrite(File_path + "_gt.png", frame2)
                 break
         Cam_Option.release()
         cv2.destroyAllWindows()
@@ -242,6 +267,6 @@ class Image_Filter_Generator():
 # 테스트
 if __name__ == "__main__":
     filter_gen = Image_Filter_Generator()
-    # filter_gen.full_filter(filter_gen.cap, "full_face_filter_output.png")
-    # filter_gen.glitter_filter(filter_gen.cap, "glitter_filter_output.png", 1)
-    # filter_gen.nose_filter(filter_gen.cap, "nose_filter_output.png")
+    # filter_gen.full_filter(filter_gen.cap, "test", 500, 500)
+    # filter_gen.glitter_filter(filter_gen.cap, "glitter_test", 500, 500, 1)
+    filter_gen.nose_filter(filter_gen.cap, "nose_filter_output.png", 500, 500)
