@@ -12,5 +12,5 @@
     1. Cam_Option : Numeric index -> Camera, Filepath -> videofile
     2. File_Path : filtered image will be saved here
     3. Filter_Level : frequency of glitter 0 = maximum, large num to decrease(integer only >= 0)
-
-
+C:\Users\Hello\Desktop\24SS_DE\GAN_based_Image_Restoration\test_gt.png
+C:\Users\Hello\Desktop\24SS_DE\GAN_based_Image_Restoration\testfull_filter.png
