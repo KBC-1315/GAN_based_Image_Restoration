@@ -1,6 +1,3 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&section=header&text=GAN_based_Image_Restoration&fontSize=50" />
-<div align=center>
-
 ## Image_Filter_Generator(예시 이미지는 바꿀예정...ㅎ)
 <details>
  
@@ -29,9 +26,7 @@
     3. Image_width : image width
     4. Image_heigth : image height
     5. Filter_Level : frequency of glitter 0 = maximum, large num to decrease(integer only >= 0)
-
+       
 ![glitter_test_gt](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/00e14a75-e90e-4a24-a56f-241534c08e49)
 ![glitter_test_glitter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/275d57d6-b4fe-410e-ba12-a63fdfbcb57a)
 </details>
-</div>
-<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&section=footer&text=GIST_24SS_Data_Engineering_Team1&fontSize=50" />
