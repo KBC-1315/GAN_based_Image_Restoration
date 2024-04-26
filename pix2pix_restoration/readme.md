@@ -1,3 +1,5 @@
+# Training 및 Restoration 수행을 위한 설명
+
 ## 디렉토리 및 데이터셋 설정
 1. data폴더는 경로 설정에 따라 바뀔 수 있음.
 2. 단 train 폴더는 디렉토리 구조와 폴더명을 그대로 사용해야 하며, a 폴더에는 target image(GT), b 폴더에는 filtered(마스킹된) 이미지가 들어가야 함. (sample이미지를 삭제하고 사용할 것)
