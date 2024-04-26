@@ -6,7 +6,7 @@ from math import hypot
 import os
 import numpy as np
 
-class Image_Filter_Generator():
+class Mass_Filter_Application():
     def __init__(self):
         pass
 
@@ -169,7 +169,7 @@ class Image_Filter_Generator():
 
 # 테스트
 if __name__ == "__main__":
-    filter_gen = Image_Filter_Generator()
+    filter_gen = Mass_Filter_Application()
     filter_gen.full_filter("./Image_Filter_Generator/input_images", "./Image_Filter_Generator/output_images", 500, 500)
     filter_gen.glitter_filter("./Image_Filter_Generator/input_images", "./Image_Filter_Generator/output_images", 500, 500, 1)
     filter_gen.nose_filter("./Image_Filter_Generator/input_images", "./Image_Filter_Generator/output_images", 500, 500)
