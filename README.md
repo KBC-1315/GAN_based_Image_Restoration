@@ -1,7 +1,5 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&section=header&text=GAN_based_Image_Restoration&fontSize=50" />
 <div align=center>
-## GAN_based_Image_Restoration
- 24SS_Data_Engineering_Team1
 
 ## Image_Filter_Generator(예시 이미지는 바꿀예정...ㅎ)
 <details>
