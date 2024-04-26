@@ -19,14 +19,14 @@
 ## 이미지 파일 확장자
 train 및 input 이미지로는 아래와 같은 형식을 지원함(PIL.open() 함수에서 지원하는 형식)
 
-BMP (Windows Bitmap)
-EPS (Encapsulated Postscript)
-GIF (Graphics Interchange Format)
-ICO (Windows Icon)
-JPEG (Joint Photographic Experts Group)
-PNG (Portable Network Graphics)
-PPM (Portable Pixmap)
-TIFF (Tagged Image File Format)
-WebP (Google WebP Image Format)
+- BMP (Windows Bitmap)
+- EPS (Encapsulated Postscript)
+- GIF (Graphics Interchange Format)
+- ICO (Windows Icon)
+- JPEG (Joint Photographic Experts Group)
+- PNG (Portable Network Graphics)
+- PPM (Portable Pixmap)
+- TIFF (Tagged Image File Format)
+- WebP (Google WebP Image Format)
 
 output 형식은 jpg로 지정해두었으나 restore.py에서 주석 처리된 코드를 바꾸는 것으로 확장자 제한을 간단하게 없앨 수 있게 되어있음.
