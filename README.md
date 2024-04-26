@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=높이&section=header&text=GAN_based_Image_Restoration&fontSize=10" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=높이&section=header&text=GAN_based_Image_Restoration&fontSize=70" />
 
 ## GAN_based_Image_Restoration
  24SS_Data_Engineering_Team1
@@ -35,4 +35,4 @@
 ![glitter_test_gt](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/00e14a75-e90e-4a24-a56f-241534c08e49)
 ![glitter_test_glitter](https://github.com/KBC-1315/GAN_based_Image_Restoration/assets/77442063/275d57d6-b4fe-410e-ba12-a63fdfbcb57a)
 </details>
-<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=높이&section=footer&text=GIST_24SS_Data_Engineering_Team1&fontSize=10" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=높이&section=footer&text=GIST_24SS_Data_Engineering_Team1&fontSize=70" />
