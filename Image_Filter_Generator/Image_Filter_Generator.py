@@ -27,11 +27,11 @@ class Image_Filter_Generator():
         mp_face_detection = mp.solutions.face_detection # 얼굴 검출을 위한 face_detection 모듈
         mp_drawing = mp.solutions.drawing_utils # 얼굴의 특징을 그리기 위한 drawing_utils 모듈
 
+        pwd = os.path.dirname(__file__) # 현재 스크립트 파일의 디렉토리 경로 가져오기
         # 이미지 불러오기
-        image_left_eye = cv2.imread("./Image_Filter_Generator/samples/left_eye_1.png", cv2.IMREAD_UNCHANGED)
-        image_right_eye = cv2.imread("./Image_Filter_Generator/samples/right_eye_1.png", cv2.IMREAD_UNCHANGED)
-        image_nose_tip = cv2.imread("./Image_Filter_Generator/samples/nose_tip_1.png", cv2.IMREAD_UNCHANGED)
-
+        image_left_eye = cv2.imread(pwd +"\\samples\\left_eye_1.png", cv2.IMREAD_UNCHANGED)
+        image_right_eye = cv2.imread(pwd +"\\samples\\right_eye_1.png", cv2.IMREAD_UNCHANGED)
+        image_nose_tip = cv2.imread(pwd +"\\samples\\nose_tip_1.png", cv2.IMREAD_UNCHANGED)
         with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
             while Cam_Option.isOpened():
                 success, image = Cam_Option.read()
@@ -108,7 +108,8 @@ class Image_Filter_Generator():
         frequency = filter_level # 0 보다 큰 정수
         eye_list = [242, 238, 94, 370, 362, 458, 462, 289, 455, 439, 235, 219, 94, 407, 408, 292, 306, 324, 318, 95, 77, 183, 191, 184, 76, 62, 81, 41, 38, 82, 12, 13, 312, 268, 271, 310, 272, 7, 246, 247, 30, 29, 46, 53, 52, 65, 55, 124, 113, 225, 247, 151, 33, 150, 7, 25, 110, 24, 23, 22, 26, 226, 35, 31, 156, 124, 113, 150, 140, 130, 120, 110, 180, 160, 190, 362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381, 463, 341, 256, 252, 253, 254, 339, 255, 359, 467, 260, 259, 257, 258, 286, 414, 413, 441, 442, 443, 444, 445, 342, 446, 261, 448, 449, 450, 451, 452, 453, 464, 465, 357, 350, 349, 348, 449, 448, 261, 265, 133, 173, 157, 158, 159, 160, 161, 162, 33, 7, 163, 144, 145, 153, 154, 155, 112, 243, 190, 56, 28, 27, 29, 30, 247, 226, 31, 228, 229, 230, 231, 232, 233, 244, 189, 221, 222, 223, 224, 226, 124, 35, 31, 228, 229, 230, 231, 232, 233, 245, 55, 53, 46, 156, 143, 111, 117, 118, 119, 120, 121, 128, 188]
         # video load : 웹캠 비디오를 캡처합니다.
-        image_gliter = cv2.imread(".\\Image_Filter_Generator\\samples\\gliter.png", cv2.IMREAD_UNCHANGED)
+        image_gliter = cv2.imread(pwd + "\\samples\\gliter.png", cv2.IMREAD_UNCHANGED)
+        pwd = os.path.dirname(__file__) 
 
         # mediapipe function
         mpDraw = mp.solutions.drawing_utils
@@ -177,7 +178,8 @@ class Image_Filter_Generator():
 
     def nose_filter(self, Cam_Option, File_path, Image_width, Image_height):
         # 영상 및 돼지코 이미지 로드
-        nose_img = cv2.imread('./Image_Filter_Generator/samples/pig_nose.png') 
+        pwd = os.path.dirname(__file__) 
+        nose_img = cv2.imread(pwd + '/samples/pig_nose.png') 
 
         # 5개의 center nose landmark point
         nose_landmarks = [49,279,197,2,5] 
@@ -267,6 +269,6 @@ class Image_Filter_Generator():
 # 테스트
 if __name__ == "__main__":
     filter_gen = Image_Filter_Generator()
-    # filter_gen.full_filter(filter_gen.cap, "test", 500, 500)
-    # filter_gen.glitter_filter(filter_gen.cap, "glitter_test", 500, 500, 1)
-    filter_gen.nose_filter(filter_gen.cap, "nose_filter_output.png", 500, 500)
+    filter_gen.full_filter(filter_gen.cap, "test", 500, 500)
+    #filter_gen.glitter_filter(filter_gen.cap, "glitter_test", 500, 500, 1)
+    #filter_gen.nose_filter(filter_gen.cap, "nose_filter_output.png", 500, 500)
